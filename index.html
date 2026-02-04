@@ -1,0 +1,308 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>For Ghanva 💖</title>
+
+<style>
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(-45deg, #550021, #8b0040, #5e004f, #3a002f);
+  background-size: 400% 400%;
+  animation: bgMove 15s ease infinite;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #f9f9f9;
+  text-align: center;
+  overflow: hidden;
+  filter: brightness(0.85);
+}
+
+@keyframes bgMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* START OVERLAY */
+#startOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 10, 10, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  cursor: pointer;
+}
+
+#startOverlay span {
+  background: #ff2e63;
+  padding: 22px 48px;
+  border-radius: 60px;
+  font-size: 28px;
+  font-weight: 700;
+  color: white;
+  box-shadow: 0 0 40px rgba(255, 46, 99, 0.9);
+  animation: pulseOverlay 1.5s infinite;
+  user-select: none;
+}
+
+@keyframes pulseOverlay {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.08);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* Title */
+h1 {
+  margin-top: 30px;
+  font-size: 2.6rem;
+  z-index: 2;
+  user-select: none;
+}
+
+/* Glowing name */
+.glow {
+  animation: glowPulse 2.2s infinite alternate;
+  color: #ff79a8;
+  user-select: none;
+}
+
+@keyframes glowPulse {
+  from {
+    text-shadow: 0 0 7px #ff79a8, 0 0 20px #ff4d6d, 0 0 30px #ff2e63;
+  }
+  to {
+    text-shadow: 0 0 20px #ff79a8, 0 0 40px #ff4d6d, 0 0 60px #ff2e63;
+  }
+}
+
+/* Buttons */
+.buttons {
+  margin-top: 30px;
+  display: flex;
+  gap: 25px;
+  position: relative;
+  z-index: 3;
+  user-select: none;
+}
+
+button {
+  padding: 16px 36px;
+  font-size: 18px;
+  border: none;
+  border-radius: 40px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: box-shadow 0.3s ease;
+  user-select: none;
+}
+
+#yes {
+  background: #ff2e63;
+  color: white;
+  box-shadow: 0 0 30px rgba(255, 46, 99, 0.85);
+}
+
+#yes:hover {
+  box-shadow: 0 0 45px rgba(255, 46, 99, 1);
+}
+
+#no {
+  background: white;
+  color: #ff2e63;
+  position: absolute;
+  top: 0;
+  user-select: none;
+}
+
+/* Message */
+#message {
+  margin-top: 30px;
+  font-size: 22px;
+  max-width: 680px;
+  min-height: 90px;
+  z-index: 4;
+  font-weight: 500;
+  user-select: none;
+}
+
+/* Image */
+.popup {
+  display: none;
+  margin-top: 30px;
+  background: white;
+  color: black;
+  padding: 22px;
+  border-radius: 24px;
+  box-shadow: 0 0 25px rgba(255, 46, 99, 0.8);
+  z-index: 4;
+  user-select: none;
+}
+
+.popup img {
+  max-width: 320px;
+  border-radius: 20px;
+  user-select: none;
+}
+
+/* Floating hearts */
+.heart {
+  position: fixed;
+  animation: float 8s linear infinite;
+  z-index: 1;
+  user-select: none;
+}
+
+@keyframes float {
+  from {
+    transform: translateY(110vh);
+  }
+  to {
+    transform: translateY(-10vh);
+  }
+}
+
+/* Confetti */
+.confetti {
+  position: fixed;
+  width: 10px;
+  height: 10px;
+  top: 0;
+  animation: fall 3.2s linear forwards;
+  user-select: none;
+}
+
+@keyframes fall {
+  to {
+    transform: translateY(100vh) rotate(360deg);
+    opacity: 0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<audio id="music" loop>
+  <source src="music.mp3" type="audio/mpeg" />
+</audio>
+
+<!-- START OVERLAY -->
+<div id="startOverlay">
+  <span>Tap anywhere to start 💖</span>
+</div>
+
+<h1>
+  Will You Be My Valentine, <span class="glow">Ghanva</span>? 💕
+</h1>
+
+<div class="buttons">
+  <button id="yes">Yes ❤️</button>
+  <button id="no">No 😢</button>
+</div>
+
+<div id="message"></div>
+
+<div class="popup" id="popup">
+  <h2>Forever Us 💑</h2>
+  <img src="photo.jpg" alt="Forever Us" />
+</div>
+
+<script>
+  const yesBtn = document.getElementById('yes');
+  const noBtn = document.getElementById('no');
+  const message = document.getElementById('message');
+  const popup = document.getElementById('popup');
+  const music = document.getElementById('music');
+  const overlay = document.getElementById('startOverlay');
+
+  /* START EXPERIENCE */
+  function startExperience() {
+    music.play();
+    overlay.style.display = 'none';
+  }
+  overlay.addEventListener('click', startExperience);
+  overlay.addEventListener('touchstart', startExperience);
+  overlay.addEventListener('pointerdown', startExperience);
+
+  /* NO BUTTON IMPOSSIBLE TO TOUCH */
+  document.addEventListener('mousemove', (e) => {
+    const rect = noBtn.getBoundingClientRect();
+    const dx = e.clientX - (rect.left + rect.width / 2);
+    const dy = e.clientY - (rect.top + rect.height / 2);
+    const distance = Math.sqrt(dx * dx + dy * dy);
+
+    if (distance < 120) {
+      const x = Math.random() * 300 - 150;
+      const y = Math.random() * 200 - 100;
+      noBtn.style.transform = `translate(${x}px, ${y}px)`;
+    }
+  });
+
+  /* YES CLICK */
+  yesBtn.onclick = () => {
+    typeMessage();
+    popup.style.display = 'block';
+    yesBtn.style.display = 'none';
+    noBtn.style.display = 'none';
+    confetti();
+  };
+
+  /* Love message */
+  function typeMessage() {
+    const text =
+      'Ghanva, you are the love I prayed for and the happiness I never want to lose ❤️';
+    let i = 0;
+    message.innerHTML = '';
+    const interval = setInterval(() => {
+      message.innerHTML += text[i];
+      i++;
+      if (i >= text.length) clearInterval(interval);
+    }, 45);
+  }
+
+  /* Confetti */
+  function confetti() {
+    for (let i = 0; i < 160; i++) {
+      const c = document.createElement('div');
+      c.className = 'confetti';
+      c.style.left = Math.random() * 100 + 'vw';
+      c.style.backgroundColor = `hsl(${Math.random() * 360},100%,60%)`;
+      document.body.appendChild(c);
+      setTimeout(() => c.remove(), 3000);
+    }
+  }
+
+  /* Hearts */
+  setInterval(() => {
+    for (let i = 0; i < 5; i++) {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.innerHTML = '❤️';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.fontSize = Math.random() * 28 + 15 + 'px';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 7000);
+    }
+  }, 300);
+</script>
+</body>
+</html>
